@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "135401218950",
+    "firebase_url": "https://recipe-763fb.firebaseio.com",
+    "project_id": "recipe-763fb",
+    "storage_bucket": "recipe-763fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:135401218950:android:b64f3776296fc3f2",
+        "android_client_info": {
+          "package_name": "cou.peq.com.recetas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "135401218950-g20ba3i8tdm1g7plrmj4r0mkvqtvr56n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAgBkY2T6wSIle4C_fUjnqH44N9etHlb4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
