@@ -1,22 +1,5 @@
 package cou.peq.com.recetas.Views;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
-import android.app.Activity;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -35,10 +18,12 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Handler;
 
 import cou.peq.com.recetas.Presenters.LoginPresenter;
 import cou.peq.com.recetas.Presenters.LoginPresenterImpl;
 import cou.peq.com.recetas.R;
+import cou.peq.com.recetas.Utils.UtilsAnimation.AnimationUtils;
 
 import static android.Manifest.permission.INTERNET;
 import static android.Manifest.permission.READ_CONTACTS;
@@ -50,9 +35,9 @@ public class LoginActivity extends AbstractActivity<LoginPresenter> implements L
 
     private ProgressBar progressBar;
     private LoginPresenterImpl loginPresenterImpl;
-    private AutoCompleteTextView emailTextView;
+    private EditText emailTextView;
     private EditText passwordEditText;
-
+    View confirmButton;
 
     @Override
     protected LoginPresenter createPresenter() {
@@ -63,13 +48,24 @@ public class LoginActivity extends AbstractActivity<LoginPresenter> implements L
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
-        findViewById(R.id.email_sign_in_button).setOnClickListener(this);
-        emailTextView = (AutoCompleteTextView)findViewById(R.id.email);
+        (confirmButton= findViewById(R.id.email_sign_in_button)).setOnClickListener(this);
+        emailTextView = (EditText)findViewById(R.id.email);
         passwordEditText = (EditText) findViewById(R.id.password);
-
-
         loginPresenterImpl = new LoginPresenterImpl(this);
+
+            confirmButton.postDelayed(new Runnable()
+            {
+                @Override
+                public void run(){
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        AnimationUtils.show(confirmButton);
+                    }
+                }
+            },2000);
+
     }
+
+
 
     @Override protected void onDestroy() {
         loginPresenterImpl.onDestroy();
