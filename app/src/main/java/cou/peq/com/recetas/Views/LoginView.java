@@ -16,4 +16,6 @@ public interface LoginView {
     void navigateToHome();
 
     void onRegisterSuccess();
+
+    void onRegisterFailed();
 }

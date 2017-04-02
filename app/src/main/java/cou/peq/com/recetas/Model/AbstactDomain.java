@@ -11,6 +11,8 @@ public class AbstactDomain {
 
     public void manageErrorServer(String nameError){
         GenericServerErrorEvent genericServerErrorEvent = new GenericServerErrorEvent();
+        genericServerErrorEvent.setTag(GenericServerErrorEvent.ERROR_LOGIN);
+        genericServerErrorEvent.setMessage(nameError);
         EventBusUtils.post(genericServerErrorEvent);
     }
 

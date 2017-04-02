@@ -1,5 +1,7 @@
 package cou.peq.com.recetas.Views;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -12,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,12 +34,13 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AbstractActivity<LoginPresenter> implements LoginView, View.OnClickListener {
+public class LoginActivity extends AbstractActivity<LoginPresenter> implements LoginView, View.OnClickListener{
 
     private ProgressBar progressBar;
     private LoginPresenterImpl loginPresenterImpl;
     private EditText emailTextView;
     private EditText passwordEditText;
+    private LinearLayout containerLayout;
     View confirmButton;
 
     @Override
@@ -48,23 +52,29 @@ public class LoginActivity extends AbstractActivity<LoginPresenter> implements L
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
+        progressBar=(ProgressBar)findViewById(R.id.login_progress);
+        containerLayout= (LinearLayout) findViewById(R.id.container_layout);
         (confirmButton= findViewById(R.id.email_sign_in_button)).setOnClickListener(this);
         emailTextView = (EditText)findViewById(R.id.email);
         passwordEditText = (EditText) findViewById(R.id.password);
         loginPresenterImpl = new LoginPresenterImpl(this);
 
-            confirmButton.postDelayed(new Runnable()
-            {
-                @Override
-                public void run(){
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        AnimationUtils.show(confirmButton);
-                    }
-                }
-            },2000);
-
+        showButton(confirmButton);
     }
 
+
+
+    private void  showButton(View view){
+        view.postDelayed(new Runnable()
+        {
+            @Override
+            public void run(){
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    AnimationUtils.show(confirmButton);
+                }
+            }
+        },500);
+    }
 
 
     @Override protected void onDestroy() {
@@ -94,8 +104,31 @@ public class LoginActivity extends AbstractActivity<LoginPresenter> implements L
         Toast.makeText(this,"REGISTRADO",Toast.LENGTH_LONG).show();
     }
 
-    @Override public void onClick(View v) {
-        loginPresenterImpl.createUser(emailTextView.getText().toString(),passwordEditText.getText().toString());
+    @Override
+    public void onRegisterFailed() {
+        progressBar.setVisibility(View.GONE);
+        Toast.makeText(this,"Error de autenticación", Toast.LENGTH_LONG).show();
+
+        confirmButton.animate()
+                .scaleX(1.0f)
+                .setDuration(500)
+                .setListener(null)
+                .start();
+
     }
 
+    @Override public void onClick(View v) {
+        confirmButton.animate()
+                .scaleX(0.0f)
+                .setDuration(500)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        progressBar.setVisibility(View.VISIBLE);
+                        loginPresenterImpl.createUser(emailTextView.getText().toString(),passwordEditText.getText().toString());
+                    }
+                })
+                .start();
+    }
 }

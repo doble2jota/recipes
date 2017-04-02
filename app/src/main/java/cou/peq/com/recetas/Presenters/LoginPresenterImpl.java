@@ -3,6 +3,7 @@ package cou.peq.com.recetas.Presenters;
 import cou.peq.com.recetas.Interactors.CreateUserInteractor;
 import cou.peq.com.recetas.Interactors.LoginInteractor;
 import cou.peq.com.recetas.Interactors.LoginInteractorImpl;
+import cou.peq.com.recetas.Presenters.Events.GenericServerErrorEvent;
 import cou.peq.com.recetas.Presenters.Events.UserEvent;
 import cou.peq.com.recetas.Views.LoginView;
 
@@ -26,6 +27,11 @@ public class LoginPresenterImpl extends PresenterImpl implements LoginPresenter,
     public void onEventMainThread(UserEvent userEvent){
         if (UserEvent.EVENT_SUCCESS_REGISTER_USER.equals(userEvent.getTag())){
             loginView.onRegisterSuccess();
+        }
+    }
+   public void onEventMainThread(GenericServerErrorEvent genericServerErrorEvent){
+        if (GenericServerErrorEvent.ERROR_LOGIN.equals(genericServerErrorEvent.getTag())){
+            loginView.onRegisterFailed();
         }
     }
 

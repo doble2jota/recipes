@@ -32,9 +32,6 @@ public class UserDomain extends AbstactDomain{
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.d(TAG," fail exception"+task.getException());
-                            Log.d(TAG," fail result"+task.getResult());
-
-
                             manageErrorServer("Error de autenticacion");
                             Log.d(TAG," fail");
                         }else {

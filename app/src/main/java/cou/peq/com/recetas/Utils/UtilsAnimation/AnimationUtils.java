@@ -6,6 +6,8 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.animation.Animation;
+import android.view.animation.OvershootInterpolator;
 
 /**
  * Created by Javier- on 02/04/2017.
@@ -21,7 +23,6 @@ public class AnimationUtils {
 
         // get the final radius for the clipping circle
         int finalRadius = Math.max(view.getWidth(), view.getHeight());
-
         // create the animator for this view (the start radius is zero)
         Animator anim = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
@@ -29,7 +30,6 @@ public class AnimationUtils {
                     0, finalRadius);
         }
         anim.setDuration(1000);
-
         // make the view visible and start the animation
         view.setVisibility(View.VISIBLE);
         anim.start();
