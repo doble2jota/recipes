@@ -10,5 +10,11 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
 
+    <!-- menu -->
+    <color name="option1">#FFE8A3</color>
+    <color name="option2">#FFD967</color>
+    <color name="option3">#FFC107</color>
+    <color name="option4">#9E7700</color>
+
 
 </resources>
