@@ -17,10 +17,15 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Views.LoginActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustResize">
+
+        </activity>
+        <activity android:name=".Views.MainMenuActivity"
+            android:theme="@style/AppThemeHome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
