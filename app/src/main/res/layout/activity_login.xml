@@ -111,6 +111,16 @@
                         android:layout_alignTop="@+id/email_sign_in_button"
                         android:layout_alignBottom="@+id/email_sign_in_button" />
                 </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/register_button"
+                    android:paddingTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:text="No tienes cuenta? Crea una cuenta"
+                    />
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

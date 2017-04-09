@@ -13,4 +13,23 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+
+    <!--Welcome-->
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="button_product_tour">product tour</string>
+
+    <string name="welcom_head_01">Bienvenido a Recipes :)</string>
+    <string name="welcom_content_01">Selecciona tus ingredientes y elige una receta</string>
+    <string name="welcom_head_02">Comparte y edita recetas</string>
+    <string name="welcom_content_02">Introduce tus recetas y compártelas con el resto de recipers</string>
+    <string name="welcom_head_03">Siempre contigo</string>
+    <string name="welcom_content_03">Lleva tus recetas a cualquier parte con tu smartphone.</string>
+    <string name="welcom_head_04">Guarda tus recetas y valora</string>
+    <string name="welcom_content_04">Guarda, y puntúa otras recetas para que el resto pueda probarlas.</string>
+
+
 </resources>

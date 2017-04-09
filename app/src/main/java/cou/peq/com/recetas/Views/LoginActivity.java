@@ -2,11 +2,13 @@ package cou.peq.com.recetas.Views;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
@@ -34,7 +36,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AbstractActivity<LoginPresenter> implements LoginView, View.OnClickListener{
+public class LoginActivity extends AbstractActivity<LoginPresenter> implements LoginView, View.OnClickListener,View.OnTouchListener{
 
     private ProgressBar progressBar;
     private LoginPresenterImpl loginPresenterImpl;
@@ -52,6 +54,7 @@ public class LoginActivity extends AbstractActivity<LoginPresenter> implements L
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
+        findViewById(R.id.register_button).setOnTouchListener(this);
         progressBar=(ProgressBar)findViewById(R.id.login_progress);
         containerLayout= (LinearLayout) findViewById(R.id.container_layout);
         (confirmButton= findViewById(R.id.email_sign_in_button)).setOnClickListener(this);
@@ -61,6 +64,9 @@ public class LoginActivity extends AbstractActivity<LoginPresenter> implements L
 
         showButton(confirmButton);
     }
+
+
+
 
 
 
@@ -101,7 +107,10 @@ public class LoginActivity extends AbstractActivity<LoginPresenter> implements L
 
     @Override
     public void onRegisterSuccess() {
-        Toast.makeText(this,"REGISTRADO",Toast.LENGTH_LONG).show();
+        Intent intent  = new Intent(this,WellcomeActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fadein,R.anim.fadeout);
+        finish();
     }
 
     @Override
@@ -130,5 +139,20 @@ public class LoginActivity extends AbstractActivity<LoginPresenter> implements L
                     }
                 })
                 .start();
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            switch (v.getId()) {
+                case R.id.register_button: // Id of the button
+                    Intent intent = new Intent(this, RegisterActivity.class);
+                    startActivity(intent);
+                    break;
+                default:
+                    break;
+            }
+        }
+        return true;
     }
 }
